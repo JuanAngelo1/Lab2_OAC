@@ -1,0 +1,128 @@
+Punto Flotante:
+
+Conjunto dedicado de registros, referidos como registros
+XMM-> Dan soporte a las instrucciones en punto flotante.
+
+XMM son de 128 bits, Hya 16 registros XMM
+
+van desde el xmm0 hasta el xmm15
+
+Instrucciones de Punto Flotante:
+-------------------------------------------
+Transferencia de datos escalares
+
+movss para mover valores de 32 bits (float):
+movsd para mover valores de 64 bits (double):
+
+movss xmm0,[a]; mover el valor en a al registo xmm0
+movsd [b],xmm1; mover el valor del registro xmm1 a b
+
+movss xmm2,xmm0; mover el valor en xmm0 a xmm2
+
+.....
+
+
+
+
+
+
+
+
+
+Calling Convenciones:
+
+Los sitemas operativos Linux x86-64 tienen un protocolo de llamado de funciones
+llamado System V Application Binary Interface. System V ABI.
+
+Todos los protocolos tienen un comun que juntan el uso de registros de proposito
+general con el uso ocasional de la pila.
+
+
+Transmision de Argumentos
+
+Es como se le denomina al envio de informacion a una funcion y a la obtencion 
+adecuada de un resultado de dicha funcion. Para transmitir valores
+a una funcion es call-by-value, mientras que para transmitir direcciones es
+call-by-reference. Hay varias maneras de pasar argumentos a una funcion:
+
+*Colocar valores o direcciones en un registro.
+*Definir variables globales.
+*Colocar valores o direcciones en la pila.
+
+
+Paso de Parametros:
+
+Los parametros pueden ser pasados a una funcion mediante el uso de registros
+o de la pila.
+
+Posicion del argmuento		Entero		Flotante
+	Primero			rdi		xmm0
+	Segundo			rsi		xmm1
+				rdx		xmm2
+				rcx		xmm3
+				r8		xmm4
+				r9		xmm5
+
+Ejemplo:
+
+extern void my_function(char a,short b,float c,double *d,double e)
+//a va en rdi, b en rsi, c en xmm0, d en rdx (Porque es una direccion de memoria)
+//e en xmm1
+
+
+1 quadwords (8 bytes).
+El RSP se usa para apuntar a la parte superior actual de la pila en la memoria.
+
+Cuando se hace push el RSP disminuye en 8.
+
+Cuando se hace pop el registro RSP aumenta en 8.
+
+
+
+Reglas:
+
+
+Los calling conventions se pueden dividir en dos reglas: las de caller y callee
+
+
+
+Caller: Funcion que llama a otra funcion, es la responsable de almacenar el registro
+si es necesario.
+
+Callee: Funcion que es llamada por otra funcion y esponsable, responsable de
+almacenar el registo si es necesario.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

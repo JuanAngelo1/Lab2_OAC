@@ -1,0 +1,23 @@
+nasm -f elf64 asm.asm -o asmFLoatInnerProd.o -g
+
+gcc asmFloatInnerProd.o floatInnerProd.c -o floatInnerProd -lm -g
+
+gdb floatInnerProd
+
+break 21
+
+set dissasembly-flavor intel
+
+run
+
+
+disassemble
+
+ni
+
+info r xmm0
+
+-lm es para utiilizar math.h
+
+
+xmm0= 16 bytes -> 128 bits -> 4 floats -> 4 bytes-> 32 bites
